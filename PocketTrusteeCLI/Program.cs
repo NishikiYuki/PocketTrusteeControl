@@ -13,6 +13,7 @@ public static class Program {
     public static int Main(string[] args) {
         var services = new ServiceCollection();
         services.AddLogging();
+        services.AddSingleton(AnsiConsole.Console);
 
         var provider = services.BuildServiceProvider();
 
@@ -50,6 +51,7 @@ public static class Program {
         }
         else {
             selectedDevice = devices[0];
+            AnsiConsole.MarkupLine($"[green]Found {selectedDevice.Name}[/]");
         }
 
         if (selectedDevice.SessionFactory is null) {
